@@ -13,10 +13,12 @@ def print_slow(string):
 
 
 def draw():
+  global cards, deck_of_cards
   random.shuffle(cards)
+  if len(cards) <= 0:
+    cards = deck_of_cards
   return cards.pop()
-
-
+  
 def count_high_low_cards():
   global cards
   high_cards = len([card for card in cards if card >= 10])
@@ -87,15 +89,8 @@ deck_of_cards = [
     8,
     9,
     10,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
+    10,
+    10,
     10,
     1,
     2,
@@ -107,6 +102,9 @@ deck_of_cards = [
     8,
     9,
     10,
+    10,
+    10,
+    10,
     1,
     2,
     3,
@@ -117,9 +115,26 @@ deck_of_cards = [
     8,
     9,
     10,
+    10,
+    10,
+    10,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    10,
+    10,
+    10
 ]  # DONT FIDDLE WITH THIS, ONLY CHANGE cards INSTEAD
-money = round(200 * random.random(), 2)
+money = 200 * random.random()
 while playgame == 1:
+  money = round(money, 2)
   cards = deck_of_cards
 
   D1 = draw()
@@ -128,6 +143,7 @@ while playgame == 1:
   Y2 = draw()
   Dhand = D1 + D2
   yourhand = Y1 + Y2
+  cards = deck_of_cards
 
   if money == 0:
     playgame = 0
