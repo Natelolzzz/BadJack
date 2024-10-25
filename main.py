@@ -18,7 +18,8 @@ def draw():
   if len(cards) <= 0:
     cards = deck_of_cards
   return cards.pop()
-  
+
+
 def count_high_low_cards():
   global cards
   high_cards = len([card for card in cards if card >= 10])
@@ -38,33 +39,33 @@ def dealer_hit_or_stand():
   high_card_factor = high_cards / len(cards) if len(cards) > 0 else 0
 
   if yourhand < 15 and Dhand < 18:
-      return 1  
+    return 1
 
   if bust_probability > 0.5 and Dhand >= 17:
-      return 2  
+    return 2
 
   if yourhand > 18 and Dhand >= 17:
-      return 2  
-    
+    return 2
+
   if high_card_factor > 0.4 and Dhand >= 17:
-      return 2  
+    return 2
 
   if Dhand < 17:
-      return 1  
+    return 1
 
-  return 2  
+  return 2
+
 
 def dealer_draw():
   global Dhand, money, bet
   while dealer_hit_or_stand() == 1:
-      print_slow("Dealer Hit")
-      Dhand += draw()
-      if Dhand > 21:
-          print_slow("Dealer drew over 21! YOU WIN!\n")
-          money += bet
-          return 1
+    print_slow("Dealer Hit")
+    Dhand += draw()
+    if Dhand > 21:
+      print_slow("Dealer drew over 21! YOU WIN!\n")
+      money += bet
+      return 1
   print_slow("Dealer Stood")
-
 
 
 typing_speed = 300
@@ -75,62 +76,9 @@ J = "J,"
 Q = "Q,"
 K = "K,"
 deck_of_cards = [
-    11,
-    11,
-    11,
-    11,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    10,
-    10,
-    10,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    10,
-    10,
-    10,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    10,
-    10,
-    10,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    10,
-    10,
-    10
+    11, 11, 11, 11, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 1, 2, 3, 4, 5,
+    6, 7, 8, 9, 10, 10, 10, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 1,
+    2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10
 ]  # DONT FIDDLE WITH THIS, ONLY CHANGE cards INSTEAD
 money = 200 * random.random()
 while playgame == 1:
@@ -152,9 +100,8 @@ while playgame == 1:
   print_slow("You have $" + str(money))
   print_slow("How much do you want to bet?")
   bet = float(input("> "))
-  if bet > money:
-    print_slow(
-        "Thats more money than you have, assume you want to bet the max")
+  if bet > money or bet < 0:
+    print_slow("Thats an invalid amount, assume you wanna bet the max")
     bet = money
 
   if Dhand > 21:
@@ -197,7 +144,7 @@ while playgame == 1:
         break
 
       if yourhand == 21:
-        print_slow("YOU WIN!\n")
+        print_slow("Hand is 21! YOU WIN!\n")
         money += bet
         break
 
